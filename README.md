@@ -6,6 +6,14 @@
 you to pre-expand tabs into spaces before flake8 parses files, to get around
 flake8's 8-space tab assumption.
 
+## Installation
+
+Install it via pip:
+
+```sh
+$ pip install flake8 flake8-expandtab
+```
+
 ## Configuration
 
 You can specify `--tab-width` to an integer value to activate this extension, or
