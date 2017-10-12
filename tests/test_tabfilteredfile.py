@@ -3,7 +3,7 @@ import unittest
 
 import mock
 
-import expandtab
+from flake8_expandtab import TabFilteredFile
 
 
 class TabFilteredFileTestCase(unittest.TestCase):
@@ -17,10 +17,10 @@ class TabFilteredFileTestCase(unittest.TestCase):
         self.tmpfile.write(self.data)
         self.tmpfile.flush()
 
-        self.filtered_file = expandtab.TabFilteredFile(self.tmpfile.name)
+        self.filtered_file = TabFilteredFile(self.tmpfile.name)
 
         self.tab_width_patcher = mock.patch(
-            "expandtab.TabExpander", tab_width=4)
+            "flake8_expandtab.TabExpander", tab_width=4)
         self.tab_width_patcher.start()
 
     def tearDown(self):

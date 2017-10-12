@@ -11,7 +11,7 @@ setup(
     url='https://www.github.com/hyperair/flake8-expandtab',
     entry_points={
         'flake8.extension': [
-            'expandtab = expandtab:TabExpander',
+            'expandtab = flake8_expandtab:TabExpander',
         ],
     },
     classifiers=[
