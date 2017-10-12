@@ -25,6 +25,7 @@ setup(
         ],
     },
     py_modules=['flake8_expandtab'],
+    data_files=['README.md'],
     tests_require=['mock'],
     classifiers=[
         "Framework :: Flake8",
