@@ -3,8 +3,12 @@
 from distutils.core import setup
 
 def get_long_description():
-    with open("README.md") as f:
-        return f.read()
+    try:
+        import pypandoc
+        return pypandoc.convert("README.md", "rst")
+    except ImportError:
+        with open("README.md") as f:
+            return f.read()
 
 setup(
     name='flake8-expandtab',
