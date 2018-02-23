@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
 
 def get_long_description():
     try:
@@ -26,7 +26,8 @@ setup(
     },
     py_modules=['flake8_expandtab'],
     data_files=['README.md'],
-    tests_require=['mock'],
+    tests_require=['mock', 'flake8'],
+    test_suite='tests',
     classifiers=[
         "Framework :: Flake8",
         "Intended Audience :: Developers",
