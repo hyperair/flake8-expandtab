@@ -4,15 +4,28 @@ import re
 __version__ = '0.1'
 
 
-class TabFilteredFile(file):
-    """
-    `file` derivative class that replaces indentation tabs with 4 spaces to
-    please flake8
-    """
+class TabFilteredFile(object):
     indentation_regex = re.compile(r'^(\t+)')
 
+    def __getattr__(self, attr):
+        return getattr(self._file, attr)
+
+    def __setattr__(self, attr, value):
+        return setattr(self._file, attr, value)
+
+    def __init__(self, *args, **kwargs):
+        f = open(*args, **kwargs)
+        object.__setattr__(self, '_file', f)
+
+    def __enter__(self):
+        self._file.__enter__()
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        return self._file.__exit__(exc_type, exc_value, traceback)
+
     def readline(self, *args, **kwargs):
-        line = super(TabFilteredFile, self).readline(*args, **kwargs)
+        line = self._file.readline(*args, **kwargs)
         strtype = type(line)
         tab_spaces = strtype(' ') * TabExpander.tab_width
 
