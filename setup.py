@@ -2,6 +2,7 @@
 
 from setuptools import setup
 
+
 def get_long_description():
     try:
         import pypandoc
@@ -9,6 +10,7 @@ def get_long_description():
     except ImportError:
         with open("README.md") as f:
             return f.read()
+
 
 setup(
     name='flake8-expandtab',

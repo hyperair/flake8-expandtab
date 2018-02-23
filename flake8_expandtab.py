@@ -1,5 +1,6 @@
-import flake8.processor
 import re
+
+import flake8.processor
 
 __version__ = '0.1'
 
