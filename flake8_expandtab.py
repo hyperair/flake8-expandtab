@@ -5,49 +5,22 @@ import flake8.processor
 __version__ = '0.2'
 
 
-class TabFilteredFile(object):
+class FileProcessor(flake8.processor.FileProcessor):
     indentation_regex = re.compile(r'^(\t+)')
 
-    def __getattr__(self, attr):
-        return getattr(self._file, attr)
-
-    def __setattr__(self, attr, value):
-        return setattr(self._file, attr, value)
-
-    def __init__(self, *args, **kwargs):
-        f = open(*args, **kwargs)
-        object.__setattr__(self, '_file', f)
-
-    def __enter__(self):
-        self._file.__enter__()
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        return self._file.__exit__(exc_type, exc_value, traceback)
-
-    def readline(self, *args, **kwargs):
-        line = self._file.readline(*args, **kwargs)
-        strtype = type(line)
-        tab_spaces = strtype(' ') * TabExpander.tab_width
-
-        if tab_spaces:
-            line = self.indentation_regex.sub(
-                lambda idn: tab_spaces * len(idn.group(0)), line)
-
-        return line
-
-    def readlines(self):
-        def gen():
-            while True:
-                buf = self.readline()
-                if not buf:
-                    break
-                yield buf
-        return list(gen())
+    def read_lines(self):
+        tab_spaces = ' ' * TabExpander.tab_width
+        return [
+            self.indentation_regex.sub(
+                lambda idn: tab_spaces * len(idn.group(0)),
+                line
+            )
+            for line in super(FileProcessor, self).read_lines()
+        ]
 
 
 def patch_flake8():
-    flake8.processor.open = TabFilteredFile
+    flake8.processor.FileProcessor = FileProcessor
 
 
 class TabExpander(object):
