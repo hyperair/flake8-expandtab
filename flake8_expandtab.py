@@ -2,7 +2,7 @@ import re
 
 import flake8.processor
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 
 class TabFilteredFile(object):
