@@ -14,7 +14,7 @@ def get_long_description():
 
 setup(
     name='flake8-expandtab',
-    version='0.2',
+    version='0.3',
     description='flake8 for tab junkies',
     long_description=get_long_description(),
     author='Chow Loong Jin',

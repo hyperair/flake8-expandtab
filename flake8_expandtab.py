@@ -2,7 +2,7 @@ import re
 
 import flake8.processor
 
-__version__ = '0.2'
+__version__ = '0.3'
 
 
 class FileProcessor(flake8.processor.FileProcessor):
