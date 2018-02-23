@@ -9,8 +9,8 @@ from flake8_expandtab import TabFilteredFile
 class TabFilteredFileTestCase(unittest.TestCase):
     def setUp(self):
         self.data = (
-            "\t    foo\n"
-            "\t    \tbar\n"
+            b"\t    foo\n"
+            b"\t    \tbar\n"
         )
 
         self.tmpfile = tempfile.NamedTemporaryFile()
